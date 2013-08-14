@@ -1,8 +1,8 @@
 \docType{package}
-\name{r-openspending-package}
+\name{ropenspending-package}
 \alias{openspending}
-\alias{r-openspending}
-\alias{r-openspending-package}
+\alias{ropenspending}
+\alias{ropenspending-package}
 \title{A R-Package for accessing Openspending}
 \description{
   Openspending is a global spending data analysis and

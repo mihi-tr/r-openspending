@@ -6,8 +6,8 @@
 #' from within R
 #'
 #' @import RCurl rjson
-#' @aliases openspending r-openspending
-#' @name r-openspending-package
+#' @aliases openspending ropenspending
+#' @name ropenspending-package
 #' @keywords openspending
 #' @docType package
 #' @author Michael Bauer \email{michael.bauer@@okfn.org}

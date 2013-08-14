@@ -1,4 +1,4 @@
-Package: r-openspending
+Package: ropenspending
 Type: Package
 Title: A R package to interact with OpenSpending.org
 Version: 1.0
