@@ -33,7 +33,6 @@ openspending.datasets <- function(territory=NA,language=NA) {
   if (!is.na(language)) {
     url=paste(url,"&languages=",language,sep="")
     }
-  print(url)  
   j=getURL(url)
   data=fromJSON(j)
   return(data$datasets)
