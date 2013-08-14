@@ -4,14 +4,16 @@ require("multicore")
 
 openspending.host="http://openspending.org"
 openspending.api=paste(openspending.host,"/api/2/",sep="")
+
 openspending.datasets <- function(territory=NA,language=NA) {
   url=paste(openspending.host,"/datasets.json?",sep="")
   if (!is.na(territory)) {
-    url=paste(url,"&territories=",territory,"")
+    url=paste(url,"&territories=",territory,sep="")
     }
   if (!is.na(language)) {
-    url=paste(url,"&languages=",language,"")
+    url=paste(url,"&languages=",language,sep="")
     }
+  print(url)  
   j=getURL(url)
   data=fromJSON(j)
   return(data$datasets)
