@@ -9,3 +9,4 @@ Description: r-openspending allows anyone to easily interact with the
 OpenSpending API. It facilitates analysis of different datasets, etc.
 License: BSD
 Depends: RCurl, rjson
+Suggests: multicore

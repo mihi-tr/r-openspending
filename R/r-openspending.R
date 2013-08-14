@@ -1,5 +1,6 @@
-require("RCurl")
-require("rjson")
+library("RCurl")
+library("rjson")
+require("multicore")
 
 openspending.host="http://openspending.org"
 openspending.api=paste(openspending.host,"/api/2/",sep="")
@@ -47,4 +48,56 @@ openspending.aggregate <- function(dataset, cut=NA, drilldown=NA, measure="amoun
     return(NULL)
     }
   return(data)
+  }
+
+openspending._getChildren <- function (drilldown,data,measure="amount",p=T) {
+  if (p && exists("mclapply") ) {
+      t.lapply<-mclapply
+      }
+  else {
+    t.lapply=lapply
+    }
+  if (is.na(drilldown[1])) {
+    return (list())
+    }
+  if (length(drilldown)==1) {
+    dd=drilldown[1]
+    drilldown=NA
+    }
+  else {  
+    dd=drilldown[1]
+    drilldown=drilldown[seq(2,length(drilldown))]
+    }
+  getLabel <- function(x) {
+    if (is.list(x[[dd]])) {
+        return (x[[dd]]$label)
+      }
+      else {
+        return (x[[dd]])
+        }
+    }
+   names=as.vector(sapply(data,getLabel))
+   if (is.na(drilldown[1])) {
+    return (lapply(unique(names),function(x) {
+      o=data[names==x][[1]];
+      return(
+        list(name=x, dimension=dd, amount=o[[measure]])
+        )
+      }
+      ))
+    }
+   else {
+    return(t.lapply(unique(names),function(x) {
+      children=openspending._getChildren(drilldown,data[names==x],measure,p=F);
+      amount=sum(as.vector(sapply(children,function(x) { return(x$amount)
+      })));
+      return (list(name=x, dimension=dd, amount=amount, children=children))
+      }))
+    }
+  }
+
+openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="amount", order=NA, p=T) {
+  data=openspending.aggregate(dataset,cut=cut,drilldown=drilldown,measure=measure,order=order)
+  root=list(amount=data$summary$amount,currency=data$summary$currency,children=openspending._getChildren(drilldown,data$drilldown,measure,p))
+  return(root);
   }
