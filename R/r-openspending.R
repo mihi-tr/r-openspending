@@ -3,8 +3,15 @@ require("rjson")
 
 openspending.host="http://openspending.org"
 openspending.api=paste(openspending.host,"/api/2/",sep="")
-openspending.datasets <- function() {
-  j=getURL(paste(openspending.host,"/datasets.json",sep=""))
+openspending.datasets <- function(territory=NA,language=NA) {
+  url=paste(openspending.host,"/datasets.json?",sep="")
+  if (!is.na(territory)) {
+    url=paste(url,"&territories=",territory,"")
+    }
+  if (!is.na(language)) {
+    url=paste(url,"&languages=",language,"")
+    }
+  j=getURL(url)
   data=fromJSON(j)
   return(data$datasets)
   }
