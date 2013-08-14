@@ -1,0 +1,7 @@
+export(openspending.aggregate)
+export(openspending.aggregateTree)
+export(openspending.datasets)
+export(openspending.dimensions)
+export(openspending.model)
+import(RCurl)
+import(rjson)

@@ -6,7 +6,12 @@ Date: 2013-08-14
 Author: Michael Bauer
 Maintainer: Michael Bauer <michael.bauer@okfn.org>
 Description: r-openspending allows anyone to easily interact with the
-OpenSpending API. It facilitates analysis of different datasets, etc.
+    OpenSpending API. It facilitates analysis of different datasets, etc.
 License: BSD
-Depends: RCurl, rjson
-Suggests: multicore
+Depends:
+    RCurl,
+    rjson
+Suggests:
+    multicore
+Collate:
+    'r-openspending.R'
