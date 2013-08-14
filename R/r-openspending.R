@@ -1,6 +1,5 @@
 library("RCurl")
 library("rjson")
-require("multicore")
 
 openspending.host="http://openspending.org"
 openspending.api=paste(openspending.host,"/api/2/",sep="")
@@ -99,6 +98,9 @@ openspending._getChildren <- function (drilldown,data,measure="amount",p=T) {
   }
 
 openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="amount", order=NA, p=T) {
+  if (p) {
+    require("multicore")
+    }
   data=openspending.aggregate(dataset,cut=cut,drilldown=drilldown,measure=measure,order=order)
   root=list(amount=data$summary$amount,currency=data$summary$currency,children=openspending._getChildren(drilldown,data$drilldown,measure,p))
   return(root);
