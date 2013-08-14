@@ -1,0 +1,11 @@
+Package: r-openspending
+Type: Package
+Title: A R package to interact with OpenSpending.org
+Version: 1.0
+Date: 2013-08-14
+Author: Michael Bauer
+Maintainer: Michael Bauer <michael.bauer@okfn.org>
+Description: r-openspending allows anyone to easily interact with the
+OpenSpending API. It facilitates analysis of different datasets, etc.
+License: BSD
+Depends: RCurl, rjson
