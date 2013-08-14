@@ -16,6 +16,12 @@ openspending.datasets <- function(territory=NA,language=NA) {
   return(data$datasets)
   }
 
+openspending.dimensions <- function(dataset) {
+  url=paste(openspending.host,dataset,"dimensions.json",sep="/")
+  j=getURL(url)
+  return(fromJSON(j))
+  }
+
 openspending.aggregate <- function(dataset, cut=NA, drilldown=NA, measure="amount") {
   url=paste(openspending.api,"aggregate?dataset=",dataset,"&measure=",measure,sep="")
   if (!is.na(cut)) {
