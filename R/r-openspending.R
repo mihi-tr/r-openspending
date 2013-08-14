@@ -16,8 +16,8 @@ openspending.datasets <- function(territory=NA,language=NA) {
   return(data$datasets)
   }
 
-openspending.aggregate <- function(dataset, cut=NA, drilldown=NA) {
-  url=paste(openspending.api,"aggregate?dataset=",dataset,sep="")
+openspending.aggregate <- function(dataset, cut=NA, drilldown=NA, measure="amount") {
+  url=paste(openspending.api,"aggregate?dataset=",dataset,"&measure=",measure,sep="")
   if (!is.na(cut)) {
     url=paste(url,"&cut=",cut,sep="")
     }
@@ -25,7 +25,10 @@ openspending.aggregate <- function(dataset, cut=NA, drilldown=NA) {
     url=paste(url,"&drilldown=",drilldown,sep="")
     };
   j=getURL(url)
-  print (j)
   data=fromJSON(j)
+  if (!is.null(data$errors)) {
+    write(data$errors,stderr())
+    return(NULL)
+    }
   return(data)
   }
