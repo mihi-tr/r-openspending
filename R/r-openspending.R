@@ -29,13 +29,16 @@ openspending.model <- function(dataset) {
   }
 
 
-openspending.aggregate <- function(dataset, cut=NA, drilldown=NA, measure="amount") {
+openspending.aggregate <- function(dataset, cut=NA, drilldown=NA, measure="amount",order=NA) {
   url=paste(openspending.api,"aggregate?dataset=",dataset,"&measure=",measure,sep="")
   if (!is.na(cut[1])) {
     url=paste(url,"&cut=",paste(cut,collapse="|"),sep="")
     }
   if (!is.na(drilldown[1])) {
     url=paste(url,"&drilldown=",paste(drilldown,collapse="|"),sep="")
+    };
+  if(!is.na(order[1])) {
+    url=paste(url,"&order=",paste(drilldown,collapse="|"),sep="")
     };
   j=getURL(url)
   data=fromJSON(j)
