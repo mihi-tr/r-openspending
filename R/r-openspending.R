@@ -31,8 +31,8 @@ openspending.model <- function(dataset) {
 
 openspending.aggregate <- function(dataset, cut=NA, drilldown=NA, measure="amount") {
   url=paste(openspending.api,"aggregate?dataset=",dataset,"&measure=",measure,sep="")
-  if (!is.na(cut)) {
-    url=paste(url,"&cut=",cut,sep="")
+  if (!is.na(cut[1])) {
+    url=paste(url,"&cut=",paste(cut,collapse="|"),sep="")
     }
   if (!is.na(drilldown[1])) {
     url=paste(url,"&drilldown=",paste(drilldown,collapse="|"),sep="")
