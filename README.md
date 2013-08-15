@@ -2,6 +2,7 @@ A R package to interface with OpenSpending
 ==========================================
 
 Goal: get this into CRAN - so long
+Status: Submitted to CRAN waiting for inclusion/approval
 
 Installation
 ------------
@@ -22,6 +23,10 @@ Usage
 -----
 ```R
 require(ropenspending)
-openspending.datasets()
-openspending.aggregate("medientransparenz-at",cut="time.year:2012",drilldown=c("medium","from"))
+
+data=openspending.aggregate("medientransparenz-at",cut="time.year:2012",drilldown=c("medium","from"))
+df=openspending.as.data.frame(data)
+df[["amount"]]
 ```
+
+For mor examples check the examples/ directory or ```?openspending```
