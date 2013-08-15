@@ -52,6 +52,20 @@ openspending.dimensions <- function(dataset) {
   return(fromJSON(j))
   }
 
+#' Openspending Distinct
+#'
+#' get the distinct (unique) values in a dimension
+#'
+#' @name openspending.distinct
+#' @param dataset the dataset to work on
+#' @param dimension the dimension you want distinct values from
+#' @export
+openspending.distinct <- function(dataset,dimension) {
+  url=paste(openspending.host,dataset,paste(dimension,"distinct.json",sep="."),sep="/")
+  j=getURL(url)
+  return(as.vector(fromJSON(j)$results))
+  }
+
 #' Openspending Model
 #'
 #' Shows you the internal model of the dataset in Openspending - what
