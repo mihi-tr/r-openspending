@@ -9,7 +9,7 @@ Contact: Michael Bauer <michael.bauer@okfn.org>
 BugReports: http://github.com/mihi-tr/r-openspending
 Description: r-openspending allows anyone to easily interact with the
     OpenSpending API. It facilitates analysis of different datasets, etc.
-License: BSD
+License: BSD_2_clause
 Depends:
     RCurl,
     rjson
