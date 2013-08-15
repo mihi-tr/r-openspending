@@ -1,5 +1,6 @@
 export(openspending.aggregate)
 export(openspending.aggregateTree)
+export(openspending.as.data.frame)
 export(openspending.datasets)
 export(openspending.dimensions)
 export(openspending.model)

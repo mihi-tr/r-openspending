@@ -170,7 +170,7 @@ openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="a
 #'
 #' converts the output from \code{openspending.aggregate} into a data.frame
 #'
-#' @name openspending.data.frame
+#' @name openspending.as.data.frame
 #' @param data the output from openspending.aggregate
 #' @export
 openspending.as.data.frame <- function(data) {
@@ -191,5 +191,6 @@ openspending.as.data.frame <- function(data) {
       x[[i]]}))
       }
   }
+  results[["currency"]]=c(data$summary$currency$amount);
   return(data.frame(results));    
 }  
