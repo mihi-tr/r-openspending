@@ -169,7 +169,7 @@ openspending._getChildren <- function (drilldown,data,measure="amount",p=T) {
   }
 #' Openspending aggregateTree
 #'
-#' Similar to \code{openspending.aggregate) but returns the results in a
+#' Similar to \code{openspending.aggregate} but returns the results in a
 #' tree structure.
 #' @name openspending.aggregateTree
 #' @inheritParams openspending.aggregate

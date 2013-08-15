@@ -28,7 +28,7 @@
   \code{amount:asc}, can be a vector}
 }
 \description{
-  Similar to \code{openspending.aggregate) but returns the
+  Similar to \code{openspending.aggregate} but returns the
   results in a tree structure.
 }
 \examples{
