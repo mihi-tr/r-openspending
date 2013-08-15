@@ -165,3 +165,31 @@ openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="a
   root=list(amount=data$summary$amount,currency=data$summary$currency,children=openspending._getChildren(drilldown,data$drilldown,measure,p))
   return(root);
   }
+
+#' Openspending as.data.frame
+#'
+#' converts the output from \code{openspending.aggregate} into a data.frame
+#'
+#' @name openspending.data.frame
+#' @param data the output from openspending.aggregate
+#' @export
+openspending.as.data.frame <- function(data) {
+  results=list()
+  d=data$drilldown[[1]]
+  for (i in names(d)) {
+    if (is.list(d[[i]])) {
+      for (j in names(d[[i]])) {
+        results[[paste(i,j,sep=".")]]=as.vector(
+            sapply(data$drilldown,function(x) {
+              return(x[[i]][[j]]) }));
+        
+        }
+      #labels=c(labels,paste(i,names(d[[i]]),sep="."))
+    }
+    else {
+      results[[i]]=as.vector(sapply(data$drilldown,function(x) {return
+      x[[i]]}))
+      }
+  }
+  return(data.frame(results));    
+}  
