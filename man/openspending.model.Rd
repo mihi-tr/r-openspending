@@ -12,4 +12,9 @@
   Openspending - what columns do exist and how are they
   mapped to the source file
 }
+\examples{
+require(ropenspending)
+
+openspending.model("de-bund") # get the model for the "de-bund" dataset
+}
 

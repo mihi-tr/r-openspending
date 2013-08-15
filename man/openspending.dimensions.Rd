@@ -13,4 +13,10 @@
   (the parameters you could use to cut or drilldown your
   analysis)
 }
+\examples{
+require(ropenspending)
+
+# get the dimensions for the "de-bund" dataset
+openspending.dimensions("de-bund") 
+}
 

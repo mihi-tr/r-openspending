@@ -10,6 +10,7 @@
 #' @name ropenspending-package
 #' @keywords openspending
 #' @docType package
+#' @example examples/openspending.aggregate.R
 #' @author Michael Bauer \email{michael.bauer@@okfn.org}
 library("RCurl")
 library("rjson")
@@ -24,6 +25,7 @@ openspending.api=paste(openspending.host,"/api/2/",sep="")
 #' @name openspending.datasets
 #' @param territory (Optional): searches for datasets in a specific country (2 letter ISO codes)
 #' @param language (Optional): searches for datasets in a specifig langue (2 letter code)
+#' @example examples/openspending.datasets.R
 #' @export
 openspending.datasets <- function(territory=NA,language=NA) {
   url=paste(openspending.host,"/datasets.json?",sep="")
@@ -45,6 +47,7 @@ openspending.datasets <- function(territory=NA,language=NA) {
 #'
 #' @name openspending.dimensions
 #' @param dataset the dataset you want to have information on
+#' @example examples/openspending.dimensions.R
 #' @export
 openspending.dimensions <- function(dataset) {
   url=paste(openspending.host,dataset,"dimensions.json",sep="/")
@@ -59,6 +62,7 @@ openspending.dimensions <- function(dataset) {
 #' @name openspending.distinct
 #' @param dataset the dataset to work on
 #' @param dimension the dimension you want distinct values from
+#' @example examples/openspending.distinct.R
 #' @export
 openspending.distinct <- function(dataset,dimension) {
   url=paste(openspending.host,dataset,paste(dimension,"distinct.json",sep="."),sep="/")
@@ -72,6 +76,7 @@ openspending.distinct <- function(dataset,dimension) {
 #' columns do exist and how are they mapped to the source file
 #' @name openspending.model
 #' @param dataset the dataset you want to see the model of
+#' @example examples/openspending.model.R
 #' @export
 openspending.model <- function(dataset) {
   url=paste(openspending.host,dataset,"model.json",sep="/")
@@ -95,6 +100,7 @@ openspending.model <- function(dataset) {
 #' exist in all datasets.
 #' @param order (optional) parameters to order by. e.g. \code{amount:asc},
 #' can be a vector
+#' @example examples/openspending.aggregate.R
 #' @export
 openspending.aggregate <- function(dataset, cut=NA, drilldown=NA, measure="amount",order=NA) {
   url=paste(openspending.api,"aggregate?dataset=",dataset,"&measure=",measure,sep="")
@@ -170,6 +176,7 @@ openspending._getChildren <- function (drilldown,data,measure="amount",p=T) {
 #' @param p (default=T) whether or not R should attempt to use multicore to
 #' parallelize building the tree - turn this off if you run out of memory
 #' or have other issues
+#' @example examples/openspending.aggregateTree.R
 #' @export
 openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="amount", order=NA, p=T) {
   if (p) {
@@ -186,6 +193,7 @@ openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="a
 #'
 #' @name openspending.as.data.frame
 #' @param data the output from openspending.aggregate
+#' @example examples/openspending.aggregate.R
 #' @export
 openspending.as.data.frame <- function(data) {
   results=list()
