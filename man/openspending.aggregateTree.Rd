@@ -7,8 +7,8 @@
 }
 \arguments{
   \item{p}{(default=T) whether or not R should attempt to
-  use multicore to parallelize building the tree - turn
-  this off if you run out of memory or have other issues}
+  use parallel to parallelize building the tree - turn this
+  off if you run out of memory or have other issues}
 
   \item{dataset}{the dataset you want to work on}
 

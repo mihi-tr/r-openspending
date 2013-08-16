@@ -173,14 +173,14 @@ openspending._getChildren <- function (drilldown,data,measure="amount",p=T) {
 #' tree structure.
 #' @name openspending.aggregateTree
 #' @inheritParams openspending.aggregate
-#' @param p (default=T) whether or not R should attempt to use multicore to
+#' @param p (default=T) whether or not R should attempt to use parallel to
 #' parallelize building the tree - turn this off if you run out of memory
 #' or have other issues
 #' @example examples/openspending.aggregateTree.R
 #' @export
 openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="amount", order=NA, p=T) {
   if (p) {
-    require("multicore")
+    require("parallel")
     }
   data=openspending.aggregate(dataset,cut=cut,drilldown=drilldown,measure=measure,order=order)
   root=list(amount=data$summary$amount,currency=data$summary$currency,children=openspending._getChildren(drilldown,data$drilldown,measure,p))

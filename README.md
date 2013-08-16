@@ -17,7 +17,7 @@ Requires
 * RCurl
 * rjson
 
-If present ```multicore``` will be used to paralellize aggregateTree.
+If present ```parallel``` will be used to paralellize aggregateTree.
 
 Usage
 -----
