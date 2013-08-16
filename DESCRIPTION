@@ -1,7 +1,7 @@
 Package: ropenspending
 Type: Package
 Title: A R package to interact with OpenSpending.org
-Version: 0.1
+Version: 0.2
 Date: 2013-08-14
 Author: Michael Bauer
 Maintainer: Michael Bauer <michael.bauer@okfn.org>
