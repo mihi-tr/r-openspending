@@ -187,6 +187,49 @@ openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="a
   return(root);
   }
 
+#' Openspending list.to.data.frame
+#'
+#' Converts an evenly structured list to a dataframe - the first level of
+#' lists will be interpreted as the rows
+#'
+#' @name openspending.list.to.data.frame
+#' @param lst the list to be converted to a dataframe
+#' @example examples/openspending.datasets.R
+#' @export
+
+openspending.list.to.data.frame <- function(lst) {
+  results=list()
+  d=lst[[1]]
+  for (i in names(d)) {
+    print (i);
+    if (is.list(d[[i]])) {
+      if (!is.null(names(d[[i]]))) {
+        for (j in names(d[[i]])) {
+          results[[paste(i,j,sep=".")]]=as.vector(
+              sapply(lst,function(x) {
+                return(x[[i]][[j]]) }));
+          }
+          }
+          else {
+            results[[i]]=as.vector(sapply(lst,
+              function(x) { return (paste(x[[i]],collapse=", "))}))}
+        
+    }
+    else {
+      results[[i]]=as.vector(sapply(lst,function(x) {if (is.null(x[[i]])) {
+        return ("")}
+        else { 
+          if (length(x[[i]])>1) {
+            return ( paste(x[[i]],collapse=", "))}
+          else {
+            return (x[[i]])
+            }}}))
+      }
+  }
+  print(results)
+  return(data.frame(results));    
+  }
+
 #' Openspending as.data.frame
 #'
 #' converts the output from \code{openspending.aggregate} into a data.frame
@@ -196,23 +239,7 @@ openspending.aggregateTree <- function(dataset, cut=NA, drilldown=NA, measure="a
 #' @example examples/openspending.aggregate.R
 #' @export
 openspending.as.data.frame <- function(data) {
-  results=list()
-  d=data$drilldown[[1]]
-  for (i in names(d)) {
-    if (is.list(d[[i]])) {
-      for (j in names(d[[i]])) {
-        results[[paste(i,j,sep=".")]]=as.vector(
-            sapply(data$drilldown,function(x) {
-              return(x[[i]][[j]]) }));
-        
-        }
-      #labels=c(labels,paste(i,names(d[[i]]),sep="."))
-    }
-    else {
-      results[[i]]=as.vector(sapply(data$drilldown,function(x) {return
-      x[[i]]}))
-      }
-  }
+  results=openspending.list.to.data.frame(data$drilldown);
   results[["currency"]]=c(data$summary$currency$amount);
   return(data.frame(results));    
 }  

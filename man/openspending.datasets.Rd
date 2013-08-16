@@ -16,7 +16,7 @@
 }
 \examples{
 require(ropenspending)
-openspending.datasets(territory="GB") # get all great britain data sets
-openspending.datasets(language="de") # get all german language data sets
+data=openspending.datasets(territory="GB") # get all great britain data sets
+openspending.list.to.data.frame(data) # convert to data frame
 }
 
