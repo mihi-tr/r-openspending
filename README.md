@@ -21,7 +21,7 @@ If present ```multicore``` will be used to paralellize aggregateTree.
 
 Usage
 -----
-```R
+```
 require(ropenspending)
 
 data=openspending.aggregate("medientransparenz-at",cut="time.year:2012",drilldown=c("medium","from"))
