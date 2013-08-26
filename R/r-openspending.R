@@ -201,8 +201,8 @@ openspending.list.to.data.frame <- function(lst) {
   results=list()
   d=lst[[1]]
   for (i in names(d)) {
-    print (i);
     if (is.list(d[[i]])) {
+      print(paste("list:",i))
       if (!is.null(names(d[[i]]))) {
         for (j in names(d[[i]])) {
           results[[paste(i,j,sep=".")]]=as.vector(
@@ -243,3 +243,36 @@ openspending.as.data.frame <- function(data) {
   results[["currency"]]=c(data$summary$currency$amount);
   return(data.frame(results));    
 }  
+
+#' Openspending search
+#' 
+#' uses the openspending search API to search for specific records in a
+#' dataset
+#'
+#' @name openspending.search
+#' @param q (optional) the query string
+#' @param dataset (optional) the dataset to be searched
+#' @param filter (optional) a field to filter for
+#' @param category (optional) filter for category (budget, spending or other)
+#' @example examples/openspending.search.R
+#' @export
+openspending.search <- function(q=NA, dataset=NA, filter=NA, category=NA) {
+  url=paste(openspending.api,"search?",sep="")
+  params=c()
+  if (!is.na(q)) {
+    params=c(params,paste("q",q,sep="="))
+    }
+  if (!is.na(dataset)) {
+    params=c(params,paste("dataset",dataset,sep="="))
+    }
+  if (!is.na(filter[1])) {
+    params=c(params,paste("filter",paste(filter,collapse="|"),sep="="))
+    }
+  if (!is.na(category)) {
+    params=c(params,paste("category",category,sep="="))
+    }
+  url=paste(url,paste(params,collapse="&"),sep="")
+  j=getURL(url)
+  data=fromJSON(j)
+  return(data)
+}
